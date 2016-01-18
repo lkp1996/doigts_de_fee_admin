@@ -1,23 +1,24 @@
 <?php
-
-$hostnameDB = "localhost";
-$database = "doigtsdefee";
-$usernameDB = "root";
-$passwordDB = "root";
-
-$connexion = new mysqli($hostnameDB, $usernameDB, $passwordDB, $database);
-$connexion->set_charset("utf8");
-
-if ($connexion->connect_error) {
-
-	die("Connection failed: " . $connexion->connect_error);
-
-}else{
-	// $sql = "SELECT";
-	// $result = $connexion->query($sql);
-	echo "OK";
-}
-
-$connexion->close();
-
+session_start();
 ?>
+<html lang="fr">
+<head>
+	<title>Connexion</title>
+</head>
+<body>
+<form method="POST" action="connexion.php">
+Nom d'utilisateur : <input type="text" name="input_nom_utilisateur" autofocus>
+Mot de passe : <input type="password" name="input_mot_de_passe">
+<input type="submit" value="connexion">
+</form>
+<?php
+if(isset($_GET["e"])){
+	if($_GET["e"] == 1){
+?>
+	<div class="alert alert-danger" role="alert">Nom d'utilisateur et/ou mot de passe incorrect(s)</div>
+<?php
+	}
+}
+?>
+</body>
+</html>
