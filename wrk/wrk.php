@@ -46,6 +46,18 @@ class Wrk{
 	public function add_cliente($nom, $prenom, $natel, $email){
 		return $this->wrk_cliente->add_cliente($this->bd_connexion, $nom, $prenom, $natel, $email);
 	}
+
+	public function delete_cliente($pk_cliente){
+		return $this->wrk_cliente->delete_cliente($this->bd_connexion, $pk_cliente);
+	}
+
+	public function update_cliente($pk_cliente, $nouveau_nom, $nouveau_prenom, $nouveau_natel, $nouveau_email){
+		return $this->wrk_cliente->update_cliente($bd_connexion, $pk_cliente, $nouveau_nom, $nouveau_prenom, $nouveau_natel, $nouveau_email);
+	}
+
+	public function get_liste_clientes_modifiables($pk_cliente){
+		return $this->wrk_cliente->get_liste_clientes_modifiables($bd_connexion, $pk_cliente);
+	}
 }
 
 ?>

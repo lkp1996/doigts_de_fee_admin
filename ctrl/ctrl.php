@@ -38,7 +38,6 @@ if(isset($_POST["input_nom_utilisateur"]) && isset($_POST["input_mot_de_passe"])
 
 	$wrk->deconnexion();
 
-// Mise à jour du mot de passe
 }else if(isset($_POST["nom_cliente"]) && isset($_POST["prenom_cliente"]) && isset($_POST["natel_cliente"]) && isset($_POST["email_cliente"])){
 
 	$nom_cliente = $_POST["nom_cliente"];
@@ -46,20 +45,32 @@ if(isset($_POST["input_nom_utilisateur"]) && isset($_POST["input_mot_de_passe"])
 	$natel_cliente = $_POST["natel_cliente"];
 	$email_cliente = $_POST["email_cliente"];
 
-	if($nom_cliente != "" || $prenom_cliente != "" || $natel_cliente != "" || $email_cliente != ""){
+	if($nom_cliente != "" && $prenom_cliente != "" && $natel_cliente != "" && $email_cliente != ""){
+		
 		$resultat = $wrk->add_cliente($nom_cliente, $prenom_cliente, $natel_cliente, $email_cliente);
+
+		if($resultat == "OK"){
+
+			header("Location: ../ihm/clientes.php");
+
+		}else{
+			header("Location: ../ihm/nouvelle_cliente.php?e=2");
+		}
+
 	}else{
 		header("Location: ../ihm/nouvelle_cliente.php?e=1");
 	}
 
+	
+
+}else if(isset($_POST["cliente_supp"])){
+	$resultat = $wrk->delete_cliente($_POST["cliente_supp"]);
+
 	if($resultat == "OK"){
-
 		header("Location: ../ihm/clientes.php");
-
 	}else{
-		header("Location: ../ihm/nouvelle_cliente.php?e=2");
+		header("Location: ../ihm/clientes.php?e=3");
 	}
-
 }
 
 class Ctrl{
@@ -74,7 +85,11 @@ class Ctrl{
 	}
 
 	public function affiche_liste_clientes(){
-		$this->wrk->get_liste_clientes();
+		return $this->wrk->get_liste_clientes();
+	}
+
+	public function affiche_liste_clientes_modifiables($pk_cliente){
+		return $this->wrk->get_liste_clientes_modifiables($pk_cliente);
 	}
 }
 
