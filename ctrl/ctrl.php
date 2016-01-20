@@ -71,6 +71,23 @@ if(isset($_POST["input_nom_utilisateur"]) && isset($_POST["input_mot_de_passe"])
 	}else{
 		header("Location: ../ihm/clientes.php?e=3");
 	}
+}else if(isset($_POST["pk_cliente_modif"]) && isset($_POST["nom_cliente_modif"]) && isset($_POST["prenom_cliente_modif"]) && isset($_POST["natel_cliente_modif"]) && isset($_POST["email_cliente_modif"])){
+	$pk_cliente_modif = $_POST["pk_cliente_modif"];
+	$nom_cliente_modif = $_POST["nom_cliente_modif"];
+	$prenom_cliente_modif = $_POST["prenom_cliente_modif"];
+	$natel_cliente_modif = $_POST["natel_cliente_modif"];
+	$email_cliente_modif = $_POST["email_cliente_modif"];
+
+	if($nom_cliente_modif != "" && $prenom_cliente_modif != "" && $natel_cliente_modif != "" && $email_cliente_modif != ""){
+		$resultat = $wrk->update_cliente($pk_cliente_modif, $nom_cliente_modif, $prenom_cliente_modif, $natel_cliente_modif, $email_cliente_modif);
+		if($resultat == "OK"){
+			header("Location: ../ihm/clientes.php");
+		}else{
+			header("Location: ../ihm/update_cliente.php?e=4");
+		}
+
+	}
+
 }
 
 class Ctrl{

@@ -56,7 +56,7 @@ class Wrk{
 	}
 
 	public function get_liste_clientes_modifiables($pk_cliente){
-		return $this->wrk_cliente->get_liste_clientes_modifiables($bd_connexion, $pk_cliente);
+		return $this->wrk_cliente->get_liste_clientes_modifiables($pk_cliente);
 	}
 }
 

@@ -32,7 +32,7 @@ class WrkCliente{
 			echo "<table class='table table-bordered table-hover table-striped'><thead><tr><th>Nom</th><th>Prénom</th><th>Natel</th><th>Email</th><th></th></tr></thead><tbody>";
 			while($row = $resultat->fetch_assoc()) {
 				echo "<tr><td>" . $row["Nom"] . "</td><td>" . $row["Prenom"] . "</td><td>" . $row["Natel"] . 
-				"</td><td>" . $row["Email"] . "</td><td><form action='../ihm/update_cliente.php?i=" . $row["PK_Cliente"] . "'><input type='submit' class='btn btn-primary' value='Modifier'></from> <form method='POST' action='../ctrl/ctrl.php'><input type='text' name='cliente_supp' value=" . 
+				"</td><td>" . $row["Email"] . "</td><td><a href='update_cliente.php?i=" . $row["PK_Cliente"] . "'><button class='btn btn-primary'>Modifier</button></a><form method='POST' action='../ctrl/ctrl.php'><input type='text' name='cliente_supp' value=" . 
 				$row["PK_Cliente"] . " hidden><input type='submit' class='btn btn-danger' value='Supprimer'></form></td></tr>";
 			}
 			echo "</tbody></table>";
@@ -103,8 +103,8 @@ class WrkCliente{
 		return $message;
 	}
 
-	public function get_liste_clientes_modifiables(BDConnexion $bd_connexion, $pk_cliente){
-		$this->connexion = new mysqli($bd_connexion->get_serveur(), $bd_connexion->get_nom_utilisateur(), $bd_connexion->get_mot_de_passe(), $bd_connexion->get_nom_bd());
+	public function get_liste_clientes_modifiables($pk_cliente){
+		$this->connexion = new mysqli("localhost", "root", "root", "doigtsdefee");
 		$this->connexion->set_charset("utf8");
 
 		if($this->connexion->connect_error){
@@ -117,23 +117,31 @@ class WrkCliente{
 		if ($resultat->num_rows > 0) {
 
 			if($row = $resultat->fetch_assoc()) {
+
+				$pk_cliente = $row["PK_Cliente"];
+				$nom = $row["Nom"];
+				$prenom = $row["Prenom"];
+				$natel = $row["Natel"];
+				$email = $row["Email"];
+
 				echo "<div class='row'>
 				<form method='POST' action='../ctrl/ctrl.php'>
+					<input type='text' name='pk_cliente_modif' value='$pk_cliente' hidden>
 					<div class='form-group input-group'>
 						<span class='input-group-addon'>Nom :</span>
-						<input type='text' class='form-control' name='nom_cliente_modif' value=" . $row["Nom"] . ">
+						<input type='text' class='form-control' name='nom_cliente_modif' value='$nom'>
 					</div>
 					<div class='form-group input-group'>
 						<span class='input-group-addon'>Prénom :</span>
-						<input type='text' class='form-control' name='prenom_cliente_modif' value=" . $row["Prenom"] . " >
+						<input type='text' class='form-control' name='prenom_cliente_modif' value='$prenom'>
 					</div>
 					<div class='form-group input-group'>
 						<span class='input-group-addon'>Natel :</span>
-						<input type='text' class='form-control' name='natel_cliente_modif'  value=" . $row["Natel"] . ">
+						<input type='text' class='form-control' name='natel_cliente_modif'  value='$natel'>
 					</div>
 					<div class='form-group input-group'>
 						<span class='input-group-addon'>Email :</span>
-						<input type='text' class='form-control' name='email_cliente_modif'  value=" . $row["Email"] . ">
+						<input type='text' class='form-control' name='email_cliente_modif'  value='$email'>
 					</div>
 					<div class='form-group input-group'>
 						<input type='submit' class='btn btn-success' value='Sauvegarder'>
