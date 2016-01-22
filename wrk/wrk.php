@@ -52,11 +52,30 @@ class Wrk{
 	}
 
 	public function update_cliente($pk_cliente, $nouveau_nom, $nouveau_prenom, $nouveau_natel, $nouveau_email){
-		return $this->wrk_cliente->update_cliente($bd_connexion, $pk_cliente, $nouveau_nom, $nouveau_prenom, $nouveau_natel, $nouveau_email);
+		return $this->wrk_cliente->update_cliente($this->bd_connexion, $pk_cliente, $nouveau_nom, $nouveau_prenom, $nouveau_natel, $nouveau_email);
 	}
 
 	public function get_liste_clientes_modifiables($pk_cliente){
-		return $this->wrk_cliente->get_liste_clientes_modifiables($pk_cliente);
+		return $this->wrk_cliente->get_liste_clientes_modifiables($this->bd_connexion, $pk_cliente);
+	}
+
+	/**
+	 * Cette méthode est la méthode pour mettre à jour son mot de passe.
+	 * @param $nouveau_mot_de_passe : le nouveau mot de passe
+	 * @param $nom_utilisateur : le nom d'utilisateur
+	 * @return update_mot_de_passe de wrk utilisateur
+	 */
+	public function update_mot_de_passe($nouveau_mot_de_passe, $nom_utilisateur){
+		return $this->wrk_utilisateur->update_mot_de_passe($this->bd_connexion, $nouveau_mot_de_passe, $nom_utilisateur);
+	}
+
+	/**
+	 * Cette méthode est la méthode pour récuperer le mot de passe
+	 * @param $nom_utilisateur : le nom d'utilisateur
+	 * @return get_mot_de_passe de wrk utilisateur
+	 */
+	public function get_mot_de_passe($nom_utilisateur){
+		return $this->wrk_utilisateur->get_mot_de_passe($this->bd_connexion, $nom_utilisateur);
 	}
 }
 

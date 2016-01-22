@@ -32,7 +32,7 @@ class WrkCliente{
 			echo "<table class='table table-bordered table-hover table-striped'><thead><tr><th>Nom</th><th>Prénom</th><th>Natel</th><th>Email</th><th></th></tr></thead><tbody>";
 			while($row = $resultat->fetch_assoc()) {
 				echo "<tr><td>" . $row["Nom"] . "</td><td>" . $row["Prenom"] . "</td><td>" . $row["Natel"] . 
-				"</td><td>" . $row["Email"] . "</td><td><a href='update_cliente.php?i=" . $row["PK_Cliente"] . "'><button class='btn btn-primary'>Modifier</button></a><form method='POST' action='../ctrl/ctrl.php'><input type='text' name='cliente_supp' value=" . 
+				"</td><td><a href='mailto:" . $row["Email"] . "' target='_top'>" . $row["Email"] . "</td><td><a href='update_cliente.php?i=" . $row["PK_Cliente"] . "'><button class='btn btn-primary'>Modifier</button></a><form method='POST' action='../ctrl/ctrl.php'><input type='text' name='cliente_supp' value=" . 
 				$row["PK_Cliente"] . " hidden><input type='submit' class='btn btn-danger' value='Supprimer'></form></td></tr>";
 			}
 			echo "</tbody></table>";
@@ -103,8 +103,8 @@ class WrkCliente{
 		return $message;
 	}
 
-	public function get_liste_clientes_modifiables($pk_cliente){
-		$this->connexion = new mysqli("localhost", "root", "root", "doigtsdefee");
+	public function get_liste_clientes_modifiables(BDConnexion $bd_connexion, $pk_cliente){
+		$this->connexion = new mysqli($bd_connexion->get_serveur(), $bd_connexion->get_nom_utilisateur(), $bd_connexion->get_mot_de_passe(), $bd_connexion->get_nom_bd());
 		$this->connexion->set_charset("utf8");
 
 		if($this->connexion->connect_error){

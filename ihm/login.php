@@ -2,7 +2,7 @@
     /**
      * @author Luke Perrottet
      * @version 1.0
-     * @copyright Mai 2015
+     * @copyright Janvier 2016
      *
      * Cette page est la page de login.
      */

@@ -72,19 +72,42 @@ if(isset($_POST["input_nom_utilisateur"]) && isset($_POST["input_mot_de_passe"])
 		header("Location: ../ihm/clientes.php?e=3");
 	}
 }else if(isset($_POST["pk_cliente_modif"]) && isset($_POST["nom_cliente_modif"]) && isset($_POST["prenom_cliente_modif"]) && isset($_POST["natel_cliente_modif"]) && isset($_POST["email_cliente_modif"])){
-	$pk_cliente_modif = $_POST["pk_cliente_modif"];
-	$nom_cliente_modif = $_POST["nom_cliente_modif"];
-	$prenom_cliente_modif = $_POST["prenom_cliente_modif"];
-	$natel_cliente_modif = $_POST["natel_cliente_modif"];
-	$email_cliente_modif = $_POST["email_cliente_modif"];
 
-	if($nom_cliente_modif != "" && $prenom_cliente_modif != "" && $natel_cliente_modif != "" && $email_cliente_modif != ""){
-		$resultat = $wrk->update_cliente($pk_cliente_modif, $nom_cliente_modif, $prenom_cliente_modif, $natel_cliente_modif, $email_cliente_modif);
+	if($_POST["nom_cliente_modif"] != "" && $_POST["prenom_cliente_modif"] != "" && $_POST["natel_cliente_modif"] != "" && $_POST["email_cliente_modif"] != ""){
+		$resultat = $wrk->update_cliente($_POST["pk_cliente_modif"], $_POST["nom_cliente_modif"], $_POST["prenom_cliente_modif"], $_POST["natel_cliente_modif"], $_POST["email_cliente_modif"]);
 		if($resultat == "OK"){
 			header("Location: ../ihm/clientes.php");
 		}else{
 			header("Location: ../ihm/update_cliente.php?e=4");
 		}
+
+	}else{
+		header("Location: ../ihm/update_cliente.php?e=1");
+	}
+
+}else if(isset($_POST["input_ancien_mot_de_passe"]) && isset($_POST["input_nouveau_mot_de_passe_1"]) && isset($_POST["input_nouveau_mot_de_passe_2"])){
+	
+	$ancien_mot_de_passe = md5($_POST["input_ancien_mot_de_passe"], FALSE);
+	$nouveau_mot_de_passe_1 = md5($_POST["input_nouveau_mot_de_passe_1"], FALSE);
+	$nouveau_mot_de_passe_2 = md5($_POST["input_nouveau_mot_de_passe_2"], FALSE);
+	$nom_utilisateur = $_SESSION["utilisateur"];
+
+	if($ancien_mot_de_passe != $wrk->get_mot_de_passe($nom_utilisateur)){
+
+		header("Location: ../ihm/changer_mdp.php?e=1");
+
+	}else if($nouveau_mot_de_passe_1 != $nouveau_mot_de_passe_2){
+
+		header("Location: ../ihm/changer_mdp.php?e=2");
+
+	}else if($wrk->get_mot_de_passe($nom_utilisateur) == $nouveau_mot_de_passe_1){
+
+		header("Location: ../ihm/changer_mdp.php?e=3");
+
+	}else{
+
+		$wrk->update_mot_de_passe($nouveau_mot_de_passe_1, $nom_utilisateur);
+		header("Location: ../ihm/changer_mdp.php?i=1");
 
 	}
 
