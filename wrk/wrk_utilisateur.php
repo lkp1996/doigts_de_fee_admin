@@ -87,6 +87,35 @@ class WrkUtilisateur{
 		$this->connexion->close();
 	}
 
+	public function get_liste_utilisateurs_dropdown(BDConnexion $bd_connexion, $pk_login){
+		$this->connexion = new mysqli($bd_connexion->get_serveur(), $bd_connexion->get_nom_utilisateur(), $bd_connexion->get_mot_de_passe(), $bd_connexion->get_nom_bd());
+		$this->connexion->set_charset("utf8");
+
+		if($this->connexion->connect_error){
+			die("Connection failed: " . $this->connexion->connect_error);
+		}
+
+		$sql = "SELECT * FROM Login ORDER BY Prenom";
+		$resultat = $this->connexion->query($sql);
+
+		if ($resultat->num_rows > 0) {
+			
+			echo "<select class='form-control' name='prestataire_prestation'><option value='0'>-- Choisir prestataire --</option>";
+			while($row = $resultat->fetch_assoc()) {
+				if($row["PK_Login"] == $pk_login){
+					echo "<option value='" . $row["PK_Login"] . "' selected='selected'>" . $row["Prenom"] . "</option>";
+				}else{
+					echo "<option value='" . $row["PK_Login"] . "'>" . $row["Prenom"] . "</option>";
+				}
+			}
+			echo "</select>";
+		} else {
+			echo "<p>Aucun prestataire disponible</p>";
+		}
+
+		$this->connexion->close();
+	}
+
 
 }
 

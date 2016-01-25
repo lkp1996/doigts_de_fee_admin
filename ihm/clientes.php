@@ -24,6 +24,10 @@
 				<!-- /.col-lg-12 -->
 			</div>
 			<!-- /.row -->
+			<div class="form-group input-group">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+				<input type="search" id="search_name" class="form-control" onkeyup="search_name()">
+			</div>
 
 			<?php
 				$ctrl = new Ctrl();
@@ -42,6 +46,7 @@
 		document.forms["form_deconnexion"].submit();
 	}
 	</script>
+	<script src="js/recherche.js"></script>
 
 <?php
 	include("footer.php");

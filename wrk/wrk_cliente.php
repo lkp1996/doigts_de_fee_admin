@@ -24,20 +24,21 @@ class WrkCliente{
 			die("Connection failed: " . $this->connexion->connect_error);
 		}
 
-		$sql = "SELECT * FROM Cliente";
+		$sql = "SELECT * FROM Cliente ORDER BY Nom";
 		$resultat = $this->connexion->query($sql);
 
 		if ($resultat->num_rows > 0) {
-			
-			echo "<table class='table table-bordered table-hover table-striped'><thead><tr><th>Nom</th><th>Prénom</th><th>Natel</th><th>Email</th><th></th></tr></thead><tbody>";
+			$i = 0;
+			echo "<table id='tableau_clientes' class='table table-bordered table-hover table-striped'><thead><tr><th>Nom</th><th>Prénom</th><th>Natel</th><th>Email</th><th></th></tr></thead><tbody>";
 			while($row = $resultat->fetch_assoc()) {
-				echo "<tr><td>" . $row["Nom"] . "</td><td>" . $row["Prenom"] . "</td><td>" . $row["Natel"] . 
+				echo "<tr id='" . $i . "'><td id='nom_" . $i . "'>" . $row["Nom"] . "</td><td id='prenom_" . $i . "'>" . $row["Prenom"] . "</td><td>" . $row["Natel"] . 
 				"</td><td><a href='mailto:" . $row["Email"] . "' target='_top'>" . $row["Email"] . "</td><td><a href='update_cliente.php?i=" . $row["PK_Cliente"] . "'><button class='btn btn-primary'>Modifier</button></a><form method='POST' action='../ctrl/ctrl.php'><input type='text' name='cliente_supp' value=" . 
 				$row["PK_Cliente"] . " hidden><input type='submit' class='btn btn-danger' value='Supprimer'></form></td></tr>";
+				$i += 1;
 			}
 			echo "</tbody></table>";
 		} else {
-			echo "<p>Aucune séance disponible</p>";
+			echo "<p>Aucune cliente disponible</p>";
 		}
 
 		$this->connexion->close();
@@ -149,6 +150,35 @@ class WrkCliente{
 				</form>
 			</div>";
 			}
+		}
+
+		$this->connexion->close();
+	}
+
+	public function get_liste_clientes_dropdown(BDConnexion $bd_connexion, $pk_cliente){
+		$this->connexion = new mysqli($bd_connexion->get_serveur(), $bd_connexion->get_nom_utilisateur(), $bd_connexion->get_mot_de_passe(), $bd_connexion->get_nom_bd());
+		$this->connexion->set_charset("utf8");
+
+		if($this->connexion->connect_error){
+			die("Connection failed: " . $this->connexion->connect_error);
+		}
+
+		$sql = "SELECT * FROM Cliente ORDER BY Nom";
+		$resultat = $this->connexion->query($sql);
+
+		if ($resultat->num_rows > 0) {
+			
+			echo "<select class='form-control' name='cliente_prestation'><option value='0'>-- Choisir cliente --</option>";
+			while($row = $resultat->fetch_assoc()) {
+				if($row["PK_Cliente"] == $pk_cliente){
+					echo "<option value='" . $row["PK_Cliente"] . "' selected='selected'>" . $row["Prenom"] . " " . $row["Nom"] . "</option>";
+				}else{
+					echo "<option value='" . $row["PK_Cliente"] . "'>" . $row["Prenom"] . " " . $row["Nom"] . "</option>";
+				}
+			}
+			echo "</select>";
+		} else {
+			echo "<p>Aucune cliente disponible</p>";
 		}
 
 		$this->connexion->close();
