@@ -53,6 +53,18 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        <li>
+                            <a href="prestations.php"><i class="glyphicon glyphicon-book"></i> Prestations<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse in" aria-expanded="true">
+                                <li>
+                                    <a href="prestations.php"><i class="glyphicon glyphicon-list"></i> Les prestations</a>
+                                </li>
+                                <li>
+                                    <a href="nouvelle_prestation.php"><i class="glyphicon glyphicon-plus"></i> Nouvelle prestation</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
 					</ul>
 				</div>
 				<!-- /.sidebar-collapse -->

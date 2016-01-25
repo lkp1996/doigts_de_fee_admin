@@ -111,6 +111,32 @@ if(isset($_POST["input_nom_utilisateur"]) && isset($_POST["input_mot_de_passe"])
 
 	}
 
+}else if(isset($_POST["date_prestation"]) && isset($_POST["cliente_prestation"]) && isset($_POST["prestataire_prestation"]) && isset($_POST["remarque_prestation"])){
+	if($_POST["date_prestation"] != "" && $_POST["cliente_prestation"] != "0" && $_POST["prestataire_prestation"] != "0" && $_POST["remarque_prestation"] != ""){
+		$wrk->add_prestation($_POST["date_prestation"], $_POST["cliente_prestation"], $_POST["prestataire_prestation"], $_POST["remarque_prestation"]);
+		header("Location: ../ihm/prestations.php");
+	}else{
+		header("Location: ../ihm/nouvelle_prestation.php?e=1");
+	}
+}else if(isset($_POST["prestation_supp"])){
+	$resultat = $wrk->delete_prestation($_POST["prestation_supp"]);
+
+	if($resultat == "OK"){
+		header("Location: ../ihm/prestations.php");
+	}else{
+		header("Location: ../ihm/prestations.php?e=3");
+	}
+}else if(isset($_POST["pk_prestation_modif"]) && isset($_POST["date_prestation_modif"]) && isset($_POST["cliente_prestation"]) && isset($_POST["prestataire_prestation"]) && isset($_POST["remarque_prestation_modif"])){
+	if($_POST["date_prestation_modif"] != "" && $_POST["cliente_prestation"] != "0" && $_POST["prestataire_prestation"] != "0" && $_POST["remarque_prestation_modif"] != ""){
+		$resultat = $wrk->update_prestation($_POST["pk_prestation_modif"], $_POST["date_prestation_modif"], $_POST["cliente_prestation"], $_POST["prestataire_prestation"], $_POST["remarque_prestation_modif"]);
+		if($resultat == "OK"){
+			header("Location: ../ihm/prestations.php");
+		}else{
+			header("Location: ../ihm/prestations.php?e=4");
+		}
+	}else{
+		header("Location: ../ihm/prestations.php?e=1");
+	}
 }
 
 class Ctrl{
@@ -130,6 +156,22 @@ class Ctrl{
 
 	public function affiche_liste_clientes_modifiables($pk_cliente){
 		return $this->wrk->get_liste_clientes_modifiables($pk_cliente);
+	}
+
+	public function affiche_liste_prestations(){
+		return $this->wrk->get_liste_prestations();
+	}
+
+	public function affiche_liste_clientes_dropdown($pk_cliente){
+		return $this->wrk->get_liste_clientes_dropdown($pk_cliente);
+	}
+
+	public function affiche_liste_utilisateurs_dropdown($pk_login){
+		return $this->wrk->get_liste_utilisateurs_dropdown($pk_login);
+	}
+
+	public function affiche_liste_prestations_modifiables($pk_prestation){
+		return $this->wrk->get_liste_prestations_modifiables($pk_prestation);
 	}
 }
 
