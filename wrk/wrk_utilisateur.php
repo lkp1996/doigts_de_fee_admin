@@ -100,7 +100,7 @@ class WrkUtilisateur{
 
 		if ($resultat->num_rows > 0) {
 			
-			echo "<select class='form-control' name='prestataire_prestation'><option value='0'>-- Choisir prestataire --</option>";
+			echo "<select id='list_prestataires' class='form-control' name='prestataire_prestation'  onchange='search_prestataire()'><option value='0'>-- Choisir prestataire --</option>";
 			while($row = $resultat->fetch_assoc()) {
 				if($row["PK_Login"] == $pk_login){
 					echo "<option value='" . $row["PK_Login"] . "' selected='selected'>" . $row["Prenom"] . "</option>";

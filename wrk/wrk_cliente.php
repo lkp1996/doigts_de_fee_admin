@@ -168,7 +168,7 @@ class WrkCliente{
 
 		if ($resultat->num_rows > 0) {
 			
-			echo "<select class='form-control' name='cliente_prestation'><option value='0'>-- Choisir cliente --</option>";
+			echo "<select id='list_clientes' class='form-control' name='cliente_prestation' onchange='search_cliente()'><option value='0'>-- Choisir cliente --</option>";
 			while($row = $resultat->fetch_assoc()) {
 				if($row["PK_Cliente"] == $pk_cliente){
 					echo "<option value='" . $row["PK_Cliente"] . "' selected='selected'>" . $row["Prenom"] . " " . $row["Nom"] . "</option>";
