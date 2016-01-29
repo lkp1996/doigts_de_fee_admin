@@ -81,12 +81,11 @@ function search_date(){
             }
         }else if(selected_date == "Cette semaine"){
             
-            // if(date_select.getWeek() == aujourdhui.getWeek()){
-            //     document.getElementById(i).style.display = '';
-            // }else{
-            //     document.getElementById(i).style.display = 'none';
-            // }
-            alert(getWeekNumber(date_select)+" === "+getWeekNumber(aujourdhui));
+            if(date_select.getWeek() == aujourdhui.getWeek()){
+                document.getElementById(i).style.display = '';
+            }else{
+                document.getElementById(i).style.display = 'none';
+            }
         }else if(selected_date == "Ce mois"){
             if(mois == (aujourdhui_format[3] + aujourdhui_format[4]) && annee == (aujourdhui_format[6] + aujourdhui_format[7] + aujourdhui_format[8] + aujourdhui_format[9])){
                 document.getElementById(i).style.display = '';
@@ -129,5 +128,5 @@ Date.prototype.getWeek = function () {
   
     // The weeknumber is the number of weeks between the   
     // first thursday of the year and the thursday in the target week  
-    return [1 + Math.ceil((firstThursday - target) / 604800000), target.getFullYear()]; // 604800000 = 7 * 24 * 3600 * 1000  
+    return 1 + Math.ceil((firstThursday - target) / 604800000); // 604800000 = 7 * 24 * 3600 * 1000  
 }  

@@ -14,7 +14,6 @@
 				<a class="navbar-brand" href="index.php">Ô Doigts de Fée Administration</a>
 			</div>
 			<!-- /.navbar-header -->
-
 			<ul class="nav navbar-top-links navbar-right">
 				
 				
