@@ -26,9 +26,8 @@
 			<!-- /.row -->
 			<?php $ctrl = new Ctrl(); ?>
 			<div class="row">
-  				<div class="col-lg-6">
-    				<div class="input-group">
-    					<div class="form-group input-group">
+  				<div class="col-lg-12">
+    				<div class="form-group input-group">
 							<span class="input-group-addon">Trier par dates :</span>
 							<select id='list_dates' class='form-control' onchange="search_date()">
 								<option>-- Choisir date --</option>
@@ -37,15 +36,10 @@
 								<option>Ce mois</option>
 								<option>Cette Année</option>
 							</select>
-						</div>
-    					<div class="form-group input-group">
 							<span class="input-group-addon">Trier par clientes :</span>
 							<?php $ctrl->affiche_liste_clientes_dropdown(); ?>
-						</div>
-						<div class="form-group input-group">
 							<span class="input-group-addon">Trier par prestataires :</span>
 							<?php $ctrl->affiche_liste_utilisateurs_dropdown(); ?>
-						</div>
 					</div>
 				</div>
 			</div>

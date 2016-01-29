@@ -40,7 +40,7 @@
 					</div>
 					<div class="form-group input-group">
 						<span class="input-group-addon">Email :</span>
-						<input type="text" class="form-control" name="email_cliente" >
+						<input type="email" class="form-control" name="email_cliente" >
 					</div>
 					<div class="form-group input-group">
 						<input type="submit" class="btn btn-success" value="Ajouter">
@@ -59,8 +59,16 @@
         ?>
             <div class="alert alert-danger" role="alert">Veuillez remplir tous les champs</div>
         <?php
-                }
-            }
+                }else if($_GET["e"] == 2){
+        ?>
+            <div class="alert alert-danger" role="alert">Erreur lors de l'ajout de la cliente</div>
+        <?php
+        	   }else if($_GET["e"] == 3){
+        ?>
+            <div class="alert alert-danger" role="alert">Veuillez remplir un numéro de téléphone valide</div>
+        <?php
+        	   }
+        	}
         ?>
 		</div>
 		<!-- /#page-wrapper -->

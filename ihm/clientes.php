@@ -24,11 +24,20 @@
 				<!-- /.col-lg-12 -->
 			</div>
 			<!-- /.row -->
-			<div class="form-group input-group">
-				<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-				<input type="search" id="search_name" class="form-control" onkeyup="search_name()">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="form-group input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+						<input type="search" id="search_name" class="form-control" onkeyup="search_name()">
+					</div>
+					<div class="form-group input-group">
+						<form method="POST" action="../ctrl/ctrl.php">
+							<input type="submit" value="Exporter emails" name="export_email" class="btn btn-primary">
+						</form>
+					</div>
+				</div>
 			</div>
-
+			
 			<?php
 				$ctrl = new Ctrl();
 				$ctrl->affiche_liste_clientes();
