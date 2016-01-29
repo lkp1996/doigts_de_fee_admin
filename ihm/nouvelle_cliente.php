@@ -51,6 +51,17 @@
 		<form id="form_deconnexion" method="POST" action="../ctrl/ctrl.php">
 			<input type="text" name="deconnexion" hidden>
 		</form>
+		<?php
+            // s'il y a une erreur
+            if(isset($_GET["e"])){
+                if($_GET["e"] == 1){
+                    // on affiche l'erreur
+        ?>
+            <div class="alert alert-danger" role="alert">Veuillez remplir tous les champs</div>
+        <?php
+                }
+            }
+        ?>
 		</div>
 		<!-- /#page-wrapper -->
 
