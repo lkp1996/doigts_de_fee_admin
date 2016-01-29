@@ -108,6 +108,10 @@ class Wrk{
 	public function update_prestation($pk_prestation, $nouvelle_date, $nouvelle_cliente, $nouveau_prestataire, $nouvelle_remarque){
 		return $this->wrk_prestation->update_prestation($this->bd_connexion, $pk_prestation, $nouvelle_date, $nouvelle_cliente, $nouveau_prestataire, $nouvelle_remarque);
 	}
+
+	public function export_email_en_csv(){
+		return $this->wrk_cliente->export_email_en_csv($this->bd_connexion);
+	}
 }
 
 ?>

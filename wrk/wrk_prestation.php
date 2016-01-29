@@ -32,7 +32,7 @@ class WrkPrestation{
 			echo "<table id='tableau_prestations' class='table table-bordered table-hover table-striped'><thead><tr><th>Date</th><th>Cliente</th><th>Prestataire</th><th>Remarque</th><th></th></tr></thead><tbody>";
 			while($row = $resultat->fetch_assoc()) {
 				echo "<tr id='" . $i . "'><td id='date_" . $i . "'>" . $row["Date"] . "</td><td id='cliente_" . $i . "'>" . $row["Prenom_Cliente"] . " " . $row["Nom_Cliente"] . "</td><td id='prestataire_" . $i . "'>" . $row["Prestataire"] . 
-				"</td><td>" . $row["Remarque"] . "</td><td><a href='update_prestation.php?i=" . $row["PK_Prestation"] . "'><button class='btn btn-primary'>Modifier</button></a><form method='POST' action='../ctrl/ctrl.php'><input type='text' name='prestation_supp' value=" . 
+				"</td><td>" . $row["Remarque"] . "</td><td id='td_btn'><a href='update_prestation.php?i=" . $row["PK_Prestation"] . "'><button class='btn btn-primary' id='btn_modif'>Modifier</button></a><form method='POST' action='../ctrl/ctrl.php'><input type='text' name='prestation_supp' value=" . 
 				$row["PK_Prestation"] . " hidden><input type='submit' class='btn btn-danger' value='Supprimer'></form></td></tr>";
 				$i += 1;
 			}

@@ -65,7 +65,11 @@
         ?>
             <div class="alert alert-danger" role="alert">Veuillez remplir tous les champs</div>
         <?php
-                }
+                }else if($_GET["e"] == 2){
+        ?>
+            <div class="alert alert-danger" role="alert">Erreur lors de l'ajout de la prestation</div>
+        <?php
+        	   }
             }
         ?>
 		</div>

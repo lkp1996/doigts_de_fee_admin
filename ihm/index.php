@@ -20,11 +20,14 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Accueil</h1>
+					<h1 class="page-header">Bonjour <?php echo $_SESSION["utilisateur"] ?> !</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
 			<!-- /.row -->
+
+		<img src="img/logo_o_doigts_fee.png" id="logo">
+
 		<form id="form_deconnexion" method="POST" action="../ctrl/ctrl.php">
 			<input type="text" name="deconnexion" hidden>
 		</form>

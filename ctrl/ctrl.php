@@ -46,16 +46,18 @@ if(isset($_POST["input_nom_utilisateur"]) && isset($_POST["input_mot_de_passe"])
 	$email_cliente = $_POST["email_cliente"];
 
 	if($nom_cliente != "" && $prenom_cliente != "" && $natel_cliente != "" && $email_cliente != ""){
-		
-		$resultat = $wrk->add_cliente($nom_cliente, $prenom_cliente, $natel_cliente, $email_cliente);
 
-		if($resultat == "OK"){
-
-			header("Location: ../ihm/clientes.php");
-
+		if(preg_match('/[a-zA-Z]/', $natel_cliente) || strlen($natel_cliente) != 10){
+			header("Location: ../ihm/nouvelle_cliente.php?e=3");
 		}else{
-			header("Location: ../ihm/nouvelle_cliente.php?e=2");
+			$resultat = $wrk->add_cliente($nom_cliente, $prenom_cliente, $natel_cliente, $email_cliente);
+			if($resultat == "OK"){
+				header("Location: ../ihm/clientes.php");
+			}else{
+				header("Location: ../ihm/nouvelle_cliente.php?e=2");
+			}
 		}
+		
 
 	}else{
 		header("Location: ../ihm/nouvelle_cliente.php?e=1");
@@ -113,8 +115,12 @@ if(isset($_POST["input_nom_utilisateur"]) && isset($_POST["input_mot_de_passe"])
 
 }else if(isset($_POST["date_prestation"]) && isset($_POST["cliente_prestation"]) && isset($_POST["prestataire_prestation"]) && isset($_POST["remarque_prestation"])){
 	if($_POST["date_prestation"] != "" && $_POST["cliente_prestation"] != "0" && $_POST["prestataire_prestation"] != "0" && $_POST["remarque_prestation"] != ""){
-		$wrk->add_prestation($_POST["date_prestation"], $_POST["cliente_prestation"], $_POST["prestataire_prestation"], $_POST["remarque_prestation"]);
-		header("Location: ../ihm/prestations.php");
+		$resultat = $wrk->add_prestation($_POST["date_prestation"], $_POST["cliente_prestation"], $_POST["prestataire_prestation"], $_POST["remarque_prestation"]);
+		if($resultat == "OK"){
+			header("Location: ../ihm/prestations.php");
+		}else{
+			header("Location: ../ihm/nouvelle_prestation.php?e=2");
+		}
 	}else{
 		header("Location: ../ihm/nouvelle_prestation.php?e=1");
 	}
@@ -137,6 +143,9 @@ if(isset($_POST["input_nom_utilisateur"]) && isset($_POST["input_mot_de_passe"])
 	}else{
 		header("Location: ../ihm/prestations.php?e=1");
 	}
+}else if(isset($_POST["export_email"])){
+	$wrk->export_email_en_csv();
+	header("Location: email.csv");
 }
 
 class Ctrl{
