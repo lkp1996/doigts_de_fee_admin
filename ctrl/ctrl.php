@@ -45,18 +45,28 @@ if(isset($_POST["input_nom_utilisateur"]) && isset($_POST["input_mot_de_passe"])
 	$natel_cliente = $_POST["natel_cliente"];
 	$email_cliente = $_POST["email_cliente"];
 
-	if($nom_cliente != "" && $prenom_cliente != "" && $natel_cliente != "" && $email_cliente != ""){
+	if($nom_cliente != "" && $prenom_cliente != ""){
 
-		if(preg_match('/[a-zA-Z]/', $natel_cliente) || strlen($natel_cliente) != 10){
-			header("Location: ../ihm/nouvelle_cliente.php?e=3");
-		}else{
+		if($natel_cliente == "" && $email_cliente == ""){
 			$resultat = $wrk->add_cliente($nom_cliente, $prenom_cliente, $natel_cliente, $email_cliente);
 			if($resultat == "OK"){
-				header("Location: ../ihm/clientes.php");
+					header("Location: ../ihm/clientes.php");
+				}else{
+					header("Location: ../ihm/nouvelle_cliente.php?e=2");
+				}
+		}else{
+			if(preg_match('/[a-zA-Z]/', $natel_cliente) || strlen($natel_cliente) != 10){
+				header("Location: ../ihm/nouvelle_cliente.php?e=3");
 			}else{
-				header("Location: ../ihm/nouvelle_cliente.php?e=2");
+				$resultat = $wrk->add_cliente($nom_cliente, $prenom_cliente, $natel_cliente, $email_cliente);
+				if($resultat == "OK"){
+					header("Location: ../ihm/clientes.php");
+				}else{
+					header("Location: ../ihm/nouvelle_cliente.php?e=2");
+				}
 			}
 		}
+		
 		
 
 	}else{

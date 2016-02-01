@@ -93,7 +93,7 @@ class WrkCliente{
 			die("Connection failed: " . $this->connexion->connect_error);
 		}
 
-		$sql = "UPDATE `doigtsdefee`.`Cliente` SET `Nom` = '$nouveau_nom', `Prenom` = '$nouveau_prenom', `Natel` = '$nouveau_natel', `Email` = '$nouveau_email' WHERE `cliente`.`PK_Cliente` = $pk_cliente";
+		$sql = "UPDATE `doigtsdefee`.`Cliente` SET `Nom` = '$nouveau_nom', `Prenom` = '$nouveau_prenom', `Natel` = '$nouveau_natel', `Email` = '$nouveau_email' WHERE `Cliente`.`PK_Cliente` = $pk_cliente";
 		if($this->connexion->query($sql)){
 			$message = "OK";
 		}else{
