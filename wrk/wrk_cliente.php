@@ -192,7 +192,7 @@ class WrkCliente{
 			die("Connection failed: " . $this->connexion->connect_error);
 		}
 
-		$sql = "SELECT Email FROM Cliente";
+		$sql = "SELECT Email FROM Cliente WHERE Email != ''";
 		$resultat = $this->connexion->query($sql);
 
 		$fp = fopen('email.csv', 'w');

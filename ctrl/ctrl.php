@@ -24,11 +24,13 @@ if(isset($_POST["input_nom_utilisateur"]) && isset($_POST["input_mot_de_passe"])
 	if($resultat == "OK"){
 
 		header("Location: ../ihm/index.php");
-		$_SESSION["utilisateur"] = $nom_utilisateur;
+		setcookie("utilisateur", $nom_utilisateur, time() + (86400 * 30), "/"); // 86400 = 1 day
+		// $_COOKIE["utilisateur"] = $nom_utilisateur;
 
 	}else{
 
-		$_SESSION["utilisateur"] = "";
+		setcookie("utilisateur", "", time() - 3600);
+		// $_COOKIE["utilisateur"] = "";
 		header("Location: ../ihm/login.php?e=1");
 
 	}
@@ -102,7 +104,7 @@ if(isset($_POST["input_nom_utilisateur"]) && isset($_POST["input_mot_de_passe"])
 	$ancien_mot_de_passe = md5($_POST["input_ancien_mot_de_passe"], FALSE);
 	$nouveau_mot_de_passe_1 = md5($_POST["input_nouveau_mot_de_passe_1"], FALSE);
 	$nouveau_mot_de_passe_2 = md5($_POST["input_nouveau_mot_de_passe_2"], FALSE);
-	$nom_utilisateur = $_SESSION["utilisateur"];
+	$nom_utilisateur = $_COOKIE["utilisateur"];
 
 	if($ancien_mot_de_passe != $wrk->get_mot_de_passe($nom_utilisateur)){
 

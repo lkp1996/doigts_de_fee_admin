@@ -24,7 +24,8 @@ class Wrk{
 	 * Le constructeur de la classe
 	 */
 	public function __construct(){
-		$this->bd_connexion = new BDConnexion("doigtsdefee", "root", "root", "localhost");
+		//$this->bd_connexion = new BDConnexion("tboch_ddfadmin", "root", "root", "localhost"); //DEV
+		$this->bd_connexion = new BDConnexion("tboch_ddfadmin", "tboch_ddfadmin", "tboch_ddfadmin", "localhost"); //PROD
 		$this->wrk_cliente = new WrkCliente();
 		$this->wrk_utilisateur = new WrkUtilisateur();
 		$this->wrk_prestation = new WrkPrestation();
@@ -38,7 +39,7 @@ class Wrk{
 	 * Cette méthode permet à l'utilisateur de se déconnecter.
 	 */
 	public function deconnexion(){
-		session_destroy();
+		setcookie("utilisateur", "", time() - 3600, "/");
 		header("Location: ../ihm/login.php");
 	}
 

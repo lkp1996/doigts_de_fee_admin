@@ -8,8 +8,8 @@
      */
 
     // si l'utilisateur est déjà connecté
-    if(isset($_SESSION["utilisateur"])){
-    	if($_SESSION["utilisateur"] != ""){
+    if(isset($_COOKIE["utilisateur"])){
+    	if($_COOKIE["utilisateur"] != ""){
             // on revient sur la page d'accueil
     		header("Location: index.php");
  	   }
