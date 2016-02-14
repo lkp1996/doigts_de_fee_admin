@@ -9,7 +9,7 @@
 
 	include("../ctrl/ctrl.php");
 	// si l'utilisateur n'est pas connecté
-	if(!isset($_SESSION["utilisateur"]) || $_SESSION["utilisateur"] == ""){
+	if(!isset($_COOKIE["utilisateur"]) || $_COOKIE["utilisateur"] == ""){
 		// on retourne sur la page de login
 		header("Location: login.php");
 	}
