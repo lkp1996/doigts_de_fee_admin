@@ -29,7 +29,7 @@ if(isset($_POST["input_nom_utilisateur"]) && isset($_POST["input_mot_de_passe"])
 
 	}else{
 
-		setcookie("utilisateur", "", time() - 3600);
+		setcookie("utilisateur", "", time() - 3600, "/");
 		// $_COOKIE["utilisateur"] = "";
 		header("Location: ../ihm/login.php?e=1");
 

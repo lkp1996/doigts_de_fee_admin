@@ -53,7 +53,7 @@ class WrkCliente{
 			die("Connection failed: " . $this->connexion->connect_error);
 		}
 
-		$sql = "INSERT INTO `doigtsdefee`.`Cliente` (`PK_Cliente`, `Nom`, `Prenom`, `Natel`, `Email`) VALUES (NULL, '$nom', '$prenom', '$natel', '$email')";
+		$sql = "INSERT INTO `tboch_ddfadmin`.`Cliente` (`PK_Cliente`, `Nom`, `Prenom`, `Natel`, `Email`) VALUES (NULL, '$nom', '$prenom', '$natel', '$email')";
 		if($this->connexion->query($sql)){
 			$message = "OK";
 		}else{
@@ -73,7 +73,7 @@ class WrkCliente{
 			die("Connection failed: " . $this->connexion->connect_error);
 		}
 
-		$sql = "DELETE FROM `doigtsdefee`.`Cliente` WHERE `Cliente`.`PK_Cliente` = $pk_cliente";
+		$sql = "DELETE FROM `tboch_ddfadmin`.`Cliente` WHERE `Cliente`.`PK_Cliente` = $pk_cliente";
 		if($this->connexion->query($sql)){
 			$message = "OK";
 		}else{
@@ -93,7 +93,7 @@ class WrkCliente{
 			die("Connection failed: " . $this->connexion->connect_error);
 		}
 
-		$sql = "UPDATE `doigtsdefee`.`Cliente` SET `Nom` = '$nouveau_nom', `Prenom` = '$nouveau_prenom', `Natel` = '$nouveau_natel', `Email` = '$nouveau_email' WHERE `Cliente`.`PK_Cliente` = $pk_cliente";
+		$sql = "UPDATE `tboch_ddfadmin`.`Cliente` SET `Nom` = '$nouveau_nom', `Prenom` = '$nouveau_prenom', `Natel` = '$nouveau_natel', `Email` = '$nouveau_email' WHERE `Cliente`.`PK_Cliente` = $pk_cliente";
 		if($this->connexion->query($sql)){
 			$message = "OK";
 		}else{

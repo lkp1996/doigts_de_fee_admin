@@ -53,7 +53,7 @@ class WrkPrestation{
 			die("Connection failed: " . $this->connexion->connect_error);
 		}
 
-		$sql = "INSERT INTO `doigtsdefee`.`Prestation` (`PK_Prestation`, `Date`, `FK_Cliente`, `FK_Login`, `Remarque`) VALUES (NULL, '$date', '$cliente', '$prestataire', '$remarque')";
+		$sql = "INSERT INTO `tboch_ddfadmin`.`Prestation` (`PK_Prestation`, `Date`, `FK_Cliente`, `FK_Login`, `Remarque`) VALUES (NULL, '$date', '$cliente', '$prestataire', '$remarque')";
 		if($this->connexion->query($sql)){
 			$message = "OK";
 		}else{
@@ -73,7 +73,7 @@ class WrkPrestation{
 			die("Connection failed: " . $this->connexion->connect_error);
 		}
 
-		$sql = "DELETE FROM `doigtsdefee`.`Prestation` WHERE `Prestation`.`PK_Prestation` = $pk_prestation";
+		$sql = "DELETE FROM `tboch_ddfadmin`.`Prestation` WHERE `Prestation`.`PK_Prestation` = $pk_prestation";
 		if($this->connexion->query($sql)){
 			$message = "OK";
 		}else{
@@ -93,7 +93,7 @@ class WrkPrestation{
 			die("Connection failed: " . $this->connexion->connect_error);
 		}
 
-		$sql = "UPDATE `doigtsdefee`.`Prestation` SET `Date` = '$nouvelle_date', `FK_Cliente` = '$nouvelle_cliente', `FK_Login` = '$nouveau_prestataire', `Remarque` = '$nouvelle_remarque' WHERE `Prestation`.`PK_Prestation` = $pk_prestation";
+		$sql = "UPDATE `tboch_ddfadmin`.`Prestation` SET `Date` = '$nouvelle_date', `FK_Cliente` = '$nouvelle_cliente', `FK_Login` = '$nouveau_prestataire', `Remarque` = '$nouvelle_remarque' WHERE `Prestation`.`PK_Prestation` = $pk_prestation";
 		if($this->connexion->query($sql)){
 			$message = "OK";
 		}else{

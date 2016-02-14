@@ -37,9 +37,9 @@
 								<option>Cette Année</option>
 							</select>
 							<span class="input-group-addon">Trier par clientes :</span>
-							<?php $ctrl->affiche_liste_clientes_dropdown(); ?>
+							<?php $ctrl->affiche_liste_clientes_dropdown(0); ?>
 							<span class="input-group-addon">Trier par prestataires :</span>
-							<?php $ctrl->affiche_liste_utilisateurs_dropdown(); ?>
+							<?php $ctrl->affiche_liste_utilisateurs_dropdown(0); ?>
 					</div>
 				</div>
 			</div>
